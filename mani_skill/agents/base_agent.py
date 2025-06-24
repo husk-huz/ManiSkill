@@ -334,7 +334,7 @@ class BaseAgent:
         """
         Get the proprioceptive state of the agent, default is the qpos and qvel of the robot and any controller state.
         """
-        obs = dict(qpos=self.robot.get_qpos(), qvel=self.robot.get_qvel())
+        obs = dict(qpos=self.robot.get_qpos(), qvel=self.robot.get_qvel(), root_pose=self.robot.get_root_pose().raw_pose)
         controller_state = self.controller.get_state()
         if len(controller_state) > 0:
             obs.update(controller=controller_state)
