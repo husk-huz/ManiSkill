@@ -16,6 +16,8 @@ from mani_skill.utils.scene_builder.table import TableSceneBuilder
 from mani_skill.utils.structs.pose import Pose
 from mani_skill.utils.structs.types import SimConfig
 
+from mani_skill.envs.tasks.tabletop.camera_config import CAMERA_RES
+
 
 @register_env("PlugCharger-v1", max_episode_steps=200)
 class PlugChargerEnv(BaseEnv):
@@ -57,7 +59,7 @@ class PlugChargerEnv(BaseEnv):
     def _default_sensor_configs(self):
         pose = sapien_utils.look_at(eye=[0.3, 0, 0.6], target=[-0.1, 0, 0.1])
         return [
-            CameraConfig("base_camera", pose=pose, width=128, height=128, fov=np.pi / 2)
+            CameraConfig("base_camera", pose=pose, width=CAMERA_RES[0], height=CAMERA_RES[1], fov=np.pi / 2)
         ]
 
     @property

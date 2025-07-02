@@ -15,6 +15,8 @@ from mani_skill.utils.scene_builder.table import TableSceneBuilder
 from mani_skill.utils.structs import Pose
 from mani_skill.utils.structs.types import GPUMemoryConfig, SimConfig
 
+from mani_skill.envs.tasks.tabletop.camera_config import CAMERA_RES
+
 
 @register_env("PullCubeTool-v1", max_episode_steps=100)
 class PullCubeToolEnv(BaseEnv):
@@ -66,8 +68,8 @@ class PullCubeToolEnv(BaseEnv):
             CameraConfig(
                 "base_camera",
                 pose=pose,
-                width=128,
-                height=128,
+                width=CAMERA_RES[0],
+                height=CAMERA_RES[1],
                 fov=np.pi / 2,
                 near=0.01,
                 far=100,

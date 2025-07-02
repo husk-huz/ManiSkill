@@ -14,6 +14,7 @@ from mani_skill.utils.registration import register_env
 from mani_skill.utils.scene_builder.table import TableSceneBuilder
 from mani_skill.utils.structs.pose import Pose
 
+from mani_skill.envs.tasks.tabletop.camera_config import CAMERA_RES
 
 @register_env("StackCube-v1", max_episode_steps=50)
 class StackCubeEnv(BaseEnv):
@@ -44,12 +45,12 @@ class StackCubeEnv(BaseEnv):
     @property
     def _default_sensor_configs(self):
         pose = sapien_utils.look_at(eye=[0.3, 0, 0.6], target=[-0.1, 0, 0.1])
-        return [CameraConfig("base_camera", pose, 128, 128, np.pi / 2, 0.01, 100)]
+        return [CameraConfig("base_camera", pose, CAMERA_RES[0], CAMERA_RES[1], np.pi / 2, 0.01, 100)]
 
     @property
     def _default_human_render_camera_configs(self):
         pose = sapien_utils.look_at([0.6, 0.7, 0.6], [0.0, 0.0, 0.35])
-        return CameraConfig("render_camera", pose, 512, 512, 1, 0.01, 100)
+        return CameraConfig("render_camera", pose, CAMERA_RES[0], CAMERA_RES[1], 1, 0.01, 100)
 
     def _load_agent(self, options: dict):
         super()._load_agent(options, sapien.Pose(p=[-0.615, 0, 0]))

@@ -15,6 +15,8 @@ from mani_skill.utils.scene_builder.table import TableSceneBuilder
 from mani_skill.utils.structs import Actor, Pose
 from mani_skill.utils.structs.types import SimConfig
 
+from mani_skill.envs.tasks.tabletop.camera_config import CAMERA_RES
+
 
 def _build_box_with_hole(
     scene: ManiSkillScene, inner_radius, outer_radius, depth, center=(0, 0)
@@ -96,7 +98,7 @@ class PegInsertionSideEnv(BaseEnv):
     @property
     def _default_sensor_configs(self):
         pose = sapien_utils.look_at([0, -0.3, 0.2], [0, 0, 0.1])
-        return [CameraConfig("base_camera", pose, 128, 128, np.pi / 2, 0.01, 100)]
+        return [CameraConfig("base_camera", pose, CAMERA_RES[0], CAMERA_RES[1], np.pi / 2, 0.01, 100)]
 
     @property
     def _default_human_render_camera_configs(self):
